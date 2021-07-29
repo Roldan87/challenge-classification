@@ -1,3 +1,5 @@
+#DF split per experiments:
+
 control_exp = bear_sign[bear_sign['experiment_id'] == 1]
 
 for i in range(2,113):
