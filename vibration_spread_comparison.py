@@ -3,8 +3,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
-# bearing_signals = pd.read_csv(r'archive\bearing_signals.csv')
-# bearing_classes = pd.read_csv(r'archive\bearing_classes.csv', sep=';')
+bearing_signals = pd.read_csv(r'..\archive\bearing_signals.csv')
+bearing_classes = pd.read_csv(r'..\archive\bearing_classes.csv', sep=';')
 
 
 def get_spreads_per_axis(axis: str) -> pd.DataFrame:
@@ -68,14 +68,14 @@ def save_boxplot(spreads_df: pd.DataFrame, axis: str):
     plt.savefig(savegif_path)
 
 
-# x_spreads = get_spreads_per_axis('x')
-# write_to_csv(x_spreads, 'x')
-# save_boxplot(x_spreads, 'x')
+x_spreads = get_spreads_per_axis('x')
+write_to_csv(x_spreads, 'x')
+save_boxplot(x_spreads, 'x')
 
-# y_spreads = get_spreads_per_axis('y')
-# write_to_csv(y_spreads, 'y')
-# save_boxplot(y_spreads, 'y')
+y_spreads = get_spreads_per_axis('y')
+write_to_csv(y_spreads, 'y')
+save_boxplot(y_spreads, 'y')
 
-# z_spreads = get_spreads_per_axis('z')
-# write_to_csv(z_spreads, 'z')
-# save_boxplot(z_spreads, 'z')
+z_spreads = get_spreads_per_axis('z')
+write_to_csv(z_spreads, 'z')
+save_boxplot(z_spreads, 'z')
