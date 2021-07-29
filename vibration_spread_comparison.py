@@ -71,7 +71,7 @@ def save_boxplot(spreads_df: pd.DataFrame, axis: str):
 
 
 def save_aligned_box_plots(x_spreads, y_spreads, z_spreads):
-    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(15, 10), sharey='all')
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(12, 8), sharey='all')
     plt.ylim([-10, 30])
     fig.suptitle('Vibration spread differencess on axes x, y, z', fontsize=17)
     fig.text(0.5, 0.02, 'bad (0) or good (1) bearing', fontsize=13, ha='center')
@@ -93,6 +93,29 @@ def save_aligned_box_plots(x_spreads, y_spreads, z_spreads):
     plt.clf()
 
 
+def save_aligned_swarmplots(x_spreads, y_spreads, z_spreads):
+    fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(12, 8), sharey='all')
+    plt.ylim([-10, 30])
+    fig.suptitle('Vibration spread differencess on axes x, y, z', fontsize=17)
+    fig.text(0.5, 0.02, 'bad (0) or good (1) bearing', fontsize=13, ha='center')
+    plt.ylabel('differences between max_spread of a2 and a1')
+    fig.text(0.07, 0.5,
+         'difference between max_min_spread of test and control bearing',
+         fontsize=13,
+         rotation='vertical',
+         va='center')
+    x = sns.swarmplot(ax=ax1, x='target', y='difference_spread', data=x_spreads, palette='Set2', dodge=True)
+    x.set(xlabel='x', ylabel=None)
+    y = sns.swarmplot(ax=ax2, x='target', y='difference_spread', data=y_spreads, palette='Set2', dodge=True)
+    y.set(xlabel='y', ylabel=None)
+    z = sns.swarmplot(ax=ax3, x='target', y='difference_spread', data=z_spreads, palette='Set2', dodge=True)
+    z.set(xlabel='z', ylabel=None)
+    savefig_name = 'swarmplot_vibration_spread_differences_on_all_axes.png'
+    savegif_path = 'visuals\\' + savefig_name
+    plt.savefig(savegif_path)
+    plt.clf()
+
+
 x_spreads = get_spreads_per_axis('x')
 # write_to_csv(x_spreads, 'x')
 # save_boxplot(x_spreads, 'x')
@@ -106,3 +129,4 @@ z_spreads = get_spreads_per_axis('z')
 # save_boxplot(z_spreads, 'z')
 
 # save_aligned_box_plots(x_spreads, y_spreads, z_spreads)
+# save_aligned_swarmplots(x_spreads, y_spreads, z_spreads)
