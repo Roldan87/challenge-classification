@@ -1,1 +1,1 @@
-## Challenge Classification <<Bearings>>
+## Challenge Bearing Classification
