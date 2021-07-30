@@ -192,7 +192,7 @@ def save_plot_differences_vibration_beginnings(axis: str,
     plt.clf()
 
 
-def save_swarmplot_differences_vibration_beginnings(axis: str,
+def save_stripplot_differences_vibration_beginnings(axis: str,
                                                     df: pd.DataFrame,
                                                     df_classes: pd.DataFrame,
                                                     experiment_nr: int) -> None:
@@ -201,17 +201,18 @@ def save_swarmplot_differences_vibration_beginnings(axis: str,
     status = df_classes[df_classes.index == experiment_nr].status
 
     if 1 in status.values:
-        plt.title('good test bearing')
+        plt.title('control (green) versus test (blue) bearing (exp ' + str(experiment_nr) + ': good)', fontsize=14)
     else:
-        plt.title('bad test bearing')
+        plt.title('control (green) versus test (blue) bearing (exp ' + str(experiment_nr) + ': bad)', fontsize=14)
 
     column_name = 'a1_' + axis
-    sns.swarmplot(x=experiment.hz, y=experiment[column_name], color='green', alpha=0.5, dodge=True)
+    sns.stripplot(x=experiment.hz, y=experiment[column_name], color='green', alpha=0.35, jitter=0.3, dodge=True)
     column_name = 'a2_' + axis
-    sns.swarmplot(x=experiment.hz, y=experiment[column_name], color='blue', alpha=0.5, dodge=True)
-    plt.legend()
+    sns.stripplot(x=experiment.hz, y=experiment[column_name], color='blue', alpha=0.35, jitter=0.3, dodge=True)
     plt.ylim([-3, 3])
-    savefig_name = 'swarm_beginning_vibrations_' + axis + '_exp_nr_' + str(experiment_nr) + '.png'
+    plt.xlabel('rotations (hertz)')
+    plt.ylabel('vibrations around ' + axis)
+    savefig_name = 'strip_beginning_vibrations_' + axis + '_exp_nr_' + str(experiment_nr) + '.png'
     savegif_path = 'visuals\\' + savefig_name
     plt.savefig(savegif_path)
     plt.clf()
@@ -238,11 +239,11 @@ bearings_signals_experiments_beginnings = get_df_of_first_seconds(bearings_signa
 #                                            bearings_signals_experiments_beginnings,
 #                                            bearing_classes_dropped_outliers,
 #                                            101)    # good bearing
-# save_swarmplot_differences_vibration_beginnings('x',
+# save_stripplot_differences_vibration_beginnings('x',
 #                                                 bearings_signals_experiments_beginnings,
 #                                                 bearing_classes_dropped_outliers,
 #                                                 98)    # bad
-# save_swarmplot_differences_vibration_beginnings('x',
+# save_stripplot_differences_vibration_beginnings('x',
 #                                                 bearings_signals_experiments_beginnings,
 #                                                 bearing_classes_dropped_outliers,
 #                                                 101)    # good
