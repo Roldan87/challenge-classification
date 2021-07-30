@@ -46,13 +46,16 @@ print(target.shape)
 print(df_features.columns)
 print(target.columns)
 
+# narrowing features to first 1.5 seconds
+features = features[features["timestamp"].dt.total_seconds() < 1.5]
+
 # Merging "feature" DataFrame with "target" DataFrame
-df = pd.merge(df_features, target)
+# df = pd.merge(df_features, target)
+df = pd.merge(left=target, right=features, left_on="bearing_id", right_on="control_bearing")
 df = df.rename(columns={"status": "target"})
 print(df.shape)
 print(df.isna().sum())
 
 # get only rows up to 1.5 seconds using timeseries and store
-features = features[features["timestamp"].dt.total_seconds() < 1.5]
-features.to_csv("csv_output/focus.csv")
+df.to_csv("csv_output/focus.csv")
 print(features.shape)
