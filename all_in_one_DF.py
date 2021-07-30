@@ -15,7 +15,7 @@ features = pd.read_csv("bearing_signals.csv", sep=',', nrows=100000)
 target = pd.read_csv("bearing_classes.csv", sep=";")
 
 # Cleaning datatypes
-features["status"] = features["status"].astype(bool)
+target["status"] = target["status"].astype(bool)
 # convert floats to recognized time format
 features["timestamp"] = pd.to_timedelta(features.timestamp, unit="s")
 
