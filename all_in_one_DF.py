@@ -51,3 +51,8 @@ df = pd.merge(df_features, target)
 df = df.rename(columns={"status": "target"})
 print(df.shape)
 print(df.isna().sum())
+
+# get only rows up to 1.5 seconds using timeseries and store
+features = features[features["timestamp"].dt.total_seconds() < 1.5]
+features.to_csv("csv_output/focus.csv")
+print(features.shape)
