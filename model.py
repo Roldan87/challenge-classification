@@ -30,16 +30,30 @@ from PIL import Image, ImageDraw, ImageFont
 
 low_speed = read_csv('low_speed_set.csv', index_col=0)
 
+# Slice dataset on condition:
 
-# Replace old values for mean values per experiment
-mean_set = low_speed.copy()
-
-
+low_speed = low_speed[low_speed['timestamp'] > 0.25]
+low_speed = low_speed[low_speed['timestamp'] <= 1.5]
 
 
 # Merge Target column to dataset:
 
+low_speed['target'] = 0
+low_speed.loc[low_speed['bearing_2_id'] == 1, 'target'] = 1
+for i in range(100, 113):
+    low_speed.loc[low_speed['bearing_2_id'] == i, 'target'] = 1
 
+
+# Replace old values for mean values per experiment
+mean_set = low_speed.copy()
+
+for elem in range(2,113):
+    low_speed[low_speed['bearing_2_id'] == elem].a1_x = low_speed[low_speed['bearing_2_id'] == elem].a1_x.mean()
+    low_speed[low_speed['bearing_2_id'] == elem].a1_y = low_speed[low_speed['bearing_2_id'] == elem].a1_y.mean()
+    low_speed[low_speed['bearing_2_id'] == elem].a1_z = low_speed[low_speed['bearing_2_id'] == elem].a1_z.mean()
+    low_speed[low_speed['bearing_2_id'] == elem].a2_x = low_speed[low_speed['bearing_2_id'] == elem].a2_x.mean()
+    low_speed[low_speed['bearing_2_id'] == elem].a2_y = low_speed[low_speed['bearing_2_id'] == elem].a2_y.mean()
+    low_speed[low_speed['bearing_2_id'] == elem].a2_z = low_speed[low_speed['bearing_2_id'] == elem].a2_z.mean()
 
 
 # RandomForestClassifier Model:
@@ -68,12 +82,12 @@ print(confusion_matrix(y_test, y_pred))
 # 1.0
 #               precision    recall  f1-score   support
 # 
-#            0       1.00      1.00      1.00    117978
-#            1       1.00      1.00      1.00     16926
+#            0       1.00      1.00      1.00    104417
+#            1       1.00      1.00      1.00     15893
 # 
-#     accuracy                           1.00    134904
-#    macro avg       1.00      1.00      1.00    134904
-# weighted avg       1.00      1.00      1.00    134904
+#     accuracy                           1.00    120310
+#    macro avg       1.00      1.00      1.00    120310
+# weighted avg       1.00      1.00      1.00    120310
 # 
-# [[117978      0]
-#  [     0  16926]]
+# [[104417      0]
+#  [     0  15893]]
