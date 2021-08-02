@@ -44,7 +44,8 @@ mean_set = low_speed.copy()
 
 # RandomForestClassifier Model:
 
-X = mean_set.drop(columns= ['target', 'experiment_id', 'bearing_1_id', 'bearing_2_id', 'hz', 'w'])
+features = ['a1_x', 'a1_y', 'a1_z', 'a2_x', 'a2_y', 'a2_z', 'rpm']
+X = pd.get_dummies(mean_set[features])
 y = mean_set['target'].values
 
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.3, random_state=42)
@@ -63,20 +64,16 @@ print(score)
 print(classification_report(y_test, y_pred))
 print(confusion_matrix(y_test, y_pred))
 
-# [1. 1. 1. 1. 1.]
-
 # 1.0
-
-# precision    recall  f1-score   support
+# 1.0
+#               precision    recall  f1-score   support
 # 
-#            0       1.00      1.00      1.00    117248
-#            1       1.00      1.00      1.00     17782
+#            0       1.00      1.00      1.00    117978
+#            1       1.00      1.00      1.00     16926
 # 
-#     accuracy                           1.00    135030
-#    macro avg       1.00      1.00      1.00    135030
-# weighted avg       1.00      1.00      1.00    135030
-
-# [[117248      0]
-#  [     0  17782]]
-
-
+#     accuracy                           1.00    134904
+#    macro avg       1.00      1.00      1.00    134904
+# weighted avg       1.00      1.00      1.00    134904
+# 
+# [[117978      0]
+#  [     0  16926]]
