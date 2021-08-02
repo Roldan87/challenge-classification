@@ -29,30 +29,14 @@ bear_class = pd.read_csv('bearing_classes.csv', sep=',', index_col=0)
 bear_signal = pd.read_csv('bearing_signals.csv', sep=',', index_col=0)
 
 
-# Separate Limit-Test Experiments from Vibration-Test Experiments:
-
-limit_test = bear_signal.copy()
-vibration_test = bear_signal.copy()
-
-limit_exp = [8,11,14,15,17,19,21,23,24,29,36,81]
-
-for num in range(2,113):
-    if num not in limit_exp:
-        limit_test.drop(limit_test[limit_test['experiment_id'] == num].index, inplace=True)
-
-for num in limit_exp:
-    vibration_test.drop(vibration_test[vibration_test['experiment_id'] == num].index, inplace=True)
-
-
 # New Dataset: Slice Vibration-Test Experiments dataset on condition: "Timestamp <= 1.5 sec":
 
-low_speed_set = vibration_test[vibration_test['timestamp'] <= 1.5]
+low_speed_set = bear_signal[bear_signal['timestamp'] >= 0.1620]
+low_speed_set = bear_signal[bear_signal['timestamp'] <= 1.5]
 
 
 # Write new datasets to csv files:
 
-limit_test.to_csv('limit_test.csv')
-vibration_test.to_csv('vibration_test.csv')
 low_speed_set.to_csv('low_speed_set.csv')
 
 
