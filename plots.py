@@ -1,3 +1,15 @@
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+# Read datasets from csv files
+
+bear_class = pd.read_csv('bearing_classes.csv', sep=',')
+bear_sign = pd.read_csv('bearing_signals.csv', sep=',')
+
+
 #DF split per experiments:
 
 control_exp = bear_sign[bear_sign['experiment_id'] == 1]
