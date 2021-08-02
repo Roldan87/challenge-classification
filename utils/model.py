@@ -1,4 +1,3 @@
-# Add you code here.
 import numpy as np
 import pandas as pd
 from pandas.io.parsers import read_csv
@@ -31,7 +30,6 @@ def fit_evaluate_model_random_forest(df, features_to_exclude, test_size):
     y = df.target
     X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=test_size, random_state=42)
 
-    #scaling? Surely with rpm, high values
     X_train = StandardScaler().fit_transform(X_train)
     X_test = StandardScaler().fit_transform(X_test)
 

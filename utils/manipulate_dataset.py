@@ -1,5 +1,5 @@
 import pandas as pd
-import numpy as np
+
 
 def separate_limit_test_experiments_from_vibration_test_experiments(df, experiments_list):
     df_copy = df.copy()
