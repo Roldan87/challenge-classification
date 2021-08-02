@@ -23,9 +23,17 @@
 * sklearn
 
 # Usage
-| File                           | Description                                                                             |
-|--------------------------------|-----------------------------------------------------------------------------------------|
-| vibration_spread_comparison.py | File containing Python code.    <br>Feature engineering, calculating min-max-relationship on every axis, for every bearing. |
+| File     | Description                                                   |
+|----------|---------------------------------------------------------------|
+| main.py  | File containing Python code.    <br>Used for cleaning and feature engineering the data |
+| plots.py | File containing Python code.   <br>Used for getting to know the data and finding any   <br>correlations between features |
+| model.py | File containing Python code, using ML - Random Forest.   <br>Fitting our data to the model and use to it make predictions. |
+
+# Feature engineering
+| Column name of feature | Change made                    | Reason                                                                                                                        |
+|------------------------|--------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| timestamp              | Only keeping rows above 0,1620 | We found some outliers where the "rpm" and "hz" values spiked in the first parts of the test.  <br>With the use of plotting, we discovered a cut off point. |
+| timestamp              | Only keeping rows above 1,5    | We found that the biggest differences between it being a bad or good bearing,  could be found in the first parts of the test.  <br>With the use of plotting, we discovered a cut off point. |
 
 
 
