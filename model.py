@@ -34,20 +34,12 @@ low_speed = read_csv('low_speed_set.csv', index_col=0)
 # Replace old values for mean values per experiment
 mean_set = low_speed.copy()
 
-for num in range(0, 450100, 4501):
-    mean_set.iloc[num:(num + 4501), 4] = mean_set['a1_x'].iloc[num:(num + 4501)].mean()
-    mean_set.iloc[num:(num + 4501), 5] = mean_set['a1_y'].iloc[num:(num + 4501)].mean()
-    mean_set.iloc[num:(num + 4501), 6] = mean_set['a1_z'].iloc[num:(num + 4501)].mean()
-    mean_set.iloc[num:(num + 4501), 7] = mean_set['a2_x'].iloc[num:(num + 4501)].mean()
-    mean_set.iloc[num:(num + 4501), 8] = mean_set['a2_y'].iloc[num:(num + 4501)].mean()
-    mean_set.iloc[num:(num + 4501), 9] = mean_set['a2_z'].iloc[num:(num + 4501)].mean()
 
 
-# Assign Target column to dataset:
 
-mean_set['target'] = 0
-mean_set.at[0:4501, 'target'] = 1
-mean_set.at[9109800:10173900, 'target'] = 1
+# Merge Target column to dataset:
+
+
 
 
 # RandomForestClassifier Model:
