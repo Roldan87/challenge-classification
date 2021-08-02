@@ -44,7 +44,7 @@ mean_set = low_speed.copy()
 
 # RandomForestClassifier Model:
 
-features = ['a1_x', 'a1_y', 'a1_z', 'a2_x', 'a2_y', 'a2_z', 'rpm']
+features = ['timestamp', 'a1_x', 'a1_y', 'a1_z', 'a2_x', 'a2_y', 'a2_z', 'rpm']
 X = pd.get_dummies(mean_set[features])
 y = mean_set['target'].values
 
