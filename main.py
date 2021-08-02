@@ -31,8 +31,17 @@ bear_signal = pd.read_csv('bearing_signals.csv', sep=',', index_col=0)
 
 # New Dataset: Slice Vibration-Test Experiments dataset on condition: "Timestamp <= 1.5 sec":
 
-low_speed_set = bear_signal[bear_signal['timestamp'] >= 0.1620]
-low_speed_set = bear_signal[bear_signal['timestamp'] <= 1.5]
+low_speed_set = bear_signal.copy()
+
+low_speed_set = low_speed_set[low_speed_set['timestamp'] >= 0.1620]
+low_speed_set = low_speed_set[low_speed_set['timestamp'] <= 1.5]
+
+# Target values assigned:
+
+low_speed_set['target'] = 0
+low_speed_set.loc[low_speed_set['bearing_2_id'] == 1, 'target'] = 1
+for i in range(100, 113):
+    low_speed_set.loc[low_speed_set['bearing_2_id'] == i, 'target'] = 1
 
 
 # Write new datasets to csv files:
