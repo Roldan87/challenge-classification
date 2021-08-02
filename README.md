@@ -27,7 +27,7 @@ Below however, you can find the links to both files.
 # Usage
 | File                        | Description                                                     |
 |-----------------------------|-----------------------------------------------------------------|
-| main.py                     | File containing Python code.    <br>Used for cleaning and feature engineering the data |
+| main.py                   | File containing Python code.    <br>Used for cleaning and feature engineering the data |
 | plots.py                    | File containing Python code.   <br>Used for making some explanatory plots for this README. |
 | utils/model.py              | File containing Python code, using ML - Random Forest.   <br>Fitting our data to the model and use to it make predictions. |
 | utils/manipulate_dataset.py | File containing Python code.<br>Functions made for ease of use in a team enviroment. |
