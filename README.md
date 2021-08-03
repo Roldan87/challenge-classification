@@ -68,6 +68,9 @@ Below however, you can find the links to both files.
 ## Plot that gave us the idea to look into the first seconds.
 ![](visuals/control_vs_good_vs_bad_Y_Speed_Hz.png)
 
+## Plot that showed possible clusters![](visuals/scatter_cluster_ready.png)
+Ready for future exploration
+
 
 # Contributors
 | Name                  | Github                                 |
