@@ -3,6 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+bear_class = pd.read_csv(r'..\..\data\bearing_classes.csv', sep=';')
+bear_signal = pd.read_csv(r'..\..\data\bearing_signals.csv', sep=',')
+low_speed_set = bear_signal[(bear_signal.timestamp > 0.25) &
+                                (bear_signal.timestamp <= 1.5)]
+
 
 def get_spreads_per_axis(df: pd.DataFrame, df_classes: pd.DataFrame, axis: str) -> pd.DataFrame:
     # one index for each experiment
@@ -100,8 +105,36 @@ def save_stripplot_vibration_differences(axis: str,
     plt.clf()
 
 
-# save_aligned_swarmplots(low_speed_set, bear_class, 'swarm_lowspeed_vibrations.png')
-# low_speed_for_plotting = low_speed_set[low_speed_set.hz < 4]
-# for axis in ['x', 'y', 'z']:
-#     save_stripplot_vibration_differences(axis, low_speed_set, bear_class, 2)
-#     save_stripplot_vibration_differences(axis, low_speed_set, bear_class, 107)
+def show_plot_test_vibration_versus_control_experiment_nr1(df):
+    control_exp = df[df['experiment_id'] == 1]
+
+    for i in range(2,113):
+        locals()['exp_'+str(i)] = df[df['experiment_id'] == i]
+
+    plt.plot(control_exp.timestamp.iloc[:62000], control_exp.hz.iloc[:62000])
+    plt.title('Control Exp / Speed (Hz)')
+    plt.show()
+
+    plt.plot(control_exp.timestamp.iloc[:62000], control_exp.w.iloc[:62000])
+    plt.title('Control Exp / Power (Watts)')
+    plt.show()
+
+    # To visualize other Axis just replace exp_105.a2_X/Y and exp_26.a2_X/Y:
+    exp_105 = df[df['experiment_id'] == 105]
+    exp_26 = df[df['experiment_id'] == 26]
+
+    plt.plot(control_exp.timestamp.iloc[:62000], control_exp.a1_z.iloc[:62000], color='r', alpha=0.5)
+    plt.plot(exp_105.timestamp.iloc[:62000], exp_105.a2_z.iloc[:62000], color='g', alpha=0.4)
+    plt.plot(exp_26.timestamp.iloc[:62000], exp_26.a2_z.iloc[:62000], color='b', alpha=0.3)
+    plt.plot(control_exp.timestamp.iloc[:62000], control_exp.hz.iloc[:62000], color='y')
+    plt.title('Vibration difference between control, bad and good bearing')
+    plt.show()
+
+
+if __name__ == '__main__':
+    # save_aligned_swarmplots(low_speed_set, bear_class, 'swarm_lowspeed_vibrations.png')
+    # low_speed_for_plotting = low_speed_set[low_speed_set.hz < 4]
+    # for axis in ['x', 'y', 'z']:
+    #     save_stripplot_vibration_differences(axis, low_speed_set, bear_class, 2)
+    #     save_stripplot_vibration_differences(axis, low_speed_set, bear_class, 107)
+    show_plot_test_vibration_versus_control_experiment_nr1(bear_signal)

@@ -2,8 +2,8 @@ from utils.manipulate_dataset import *
 from utils.model import *
 
 
-bear_class = pd.read_csv(r'data\bearing_classes.csv', sep=';')
-bear_signal = pd.read_csv(r'data\bearing_signals.csv', sep=',')
+bear_class = pd.read_csv(r'..\data\bearing_classes.csv', sep=';')
+bear_signal = pd.read_csv(r'..\data\bearing_signals.csv', sep=',')
 
 if __name__ == '__main__':
     # manipulate dataset
