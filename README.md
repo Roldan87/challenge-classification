@@ -41,15 +41,14 @@ Below however, you can find the links to both files.
 | timestamp              | Only keeping rows above 0,25 | We found some outliers where the "rpm" and "hz" values spiked in the first parts of the test.  <br>With the use of plotting, we discovered a cut off point. |
 
 ![](visuals/Exp_24_RPM_reading_error.png)
-![](visuals/strip_vibrations_x_exp_nr_107.png)
-![](visuals/strip_vibrations_x_exp_nr_2.png)
 
 | Column name of feature | Change made                             | Reason                                                                                                                        |
 |------------------------|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
 | timestamp              | Only keeping rows equal to or below 1,5 | We found that the biggest differences between it being a bad or good bearing,  could be found in the first parts of the test.  <br>With the use of plotting, we discovered a cut off point. |
 
 ![](visuals/beginning_vibrations_x_exp_nr_98.png)
-
+![](visuals/strip_vibrations_x_exp_nr_107.png)
+![](visuals/strip_vibrations_x_exp_nr_2.png)
 
 
 | Column names of feature | Changes made                                                            | Reason                                                                                                      |
@@ -65,6 +64,9 @@ Below however, you can find the links to both files.
 ## Plot showing the min-max-difference of every axis, on every bearing.
 
 ![](visuals/vibration_spread_differences_on_all_axes.png)
+
+## Plot that gave us the idea to look into the first seconds.
+![](visuals/control_vs_good_vs_bad_Y_Speed_Hz.png)
 
 
 # Contributors
