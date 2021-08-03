@@ -69,9 +69,9 @@ def fft_dataframe_maker(df):
     c_sig_x = c_exp.a1_x.values
     c_sig_y = c_exp.a1_y.values
     c_sig_z = c_exp.a1_z.values
-    c_sig_fft_x = fftpack.fft(c_sig_x)
-    c_sig_fft_y = fftpack.fft(c_sig_y)
-    c_sig_fft_z = fftpack.fft(c_sig_z)
+    c_sig_fft_x = np.abs(fftpack.fft(c_sig_x))
+    c_sig_fft_y = np.abs(fftpack.fft(c_sig_y))
+    c_sig_fft_z = np.abs(fftpack.fft(c_sig_z))
     control_freq_list = {'Exp_id': exp_id, 'fft_X': c_sig_fft_x, 'fft_Y': c_sig_fft_y, 'fft_Z': c_sig_fft_z}
 
     df_freq = pd.DataFrame(control_freq_list)
@@ -81,9 +81,9 @@ def fft_dataframe_maker(df):
         sig_x = exp.a2_x.values
         sig_y = exp.a2_y.values
         sig_z = exp.a2_z.values
-        sig_fft_x = fftpack.fft(sig_x)
-        sig_fft_y = fftpack.fft(sig_y)
-        sig_fft_z = fftpack.fft(sig_z)
+        sig_fft_x = np.abs(fftpack.fft(sig_x))
+        sig_fft_y = np.abs(fftpack.fft(sig_y))
+        sig_fft_z = np.abs(fftpack.fft(sig_z))
         exp_freq_list = {'Exp_id': i, 'fft_X': sig_fft_x, 'fft_Y': sig_fft_y, 'fft_Z': sig_fft_z}
         df_temp = pd.DataFrame(exp_freq_list)
         df_freq = pd.concat([df_freq, df_temp], axis=0)
