@@ -33,7 +33,7 @@ Below however, you can find the links to both files.
 | utils/manipulate_dataset.py | File containing Python code.<br>Functions made for ease of use in a team enviroment. |
 | utils/plotting.py           | File containing Python code.<br>Used for getting to know the data.<br>Made plots to find correlations between features. |
 | csv_output                  | Folder containing some of the csv-files we used for our coding.<br>Not all of our outputted files are in here,   <br>since Github has a file limit of 100MB. |
-| visuals                     | Folder containing plots we deem interesting and helped us gain   <br>insights on the data. |
+| visuals                     | Folder containing plots we deemed interesting and helped us gain   <br>insights on the data. |
 
 # Feature engineering
 | Column name of feature | Change made                  | Reason                                                                                        |
