@@ -41,7 +41,8 @@ Below however, you can find the links to both files.
 | timestamp              | Only keeping rows above 0,25 | We found some outliers where the "rpm" and "hz" values spiked in the first parts of the test.  <br>With the use of plotting, we discovered a cut off point. |
 
 ![](visuals/Exp_24_RPM_reading_error.png)
-
+![](visuals/strip_vibrations_x_exp_nr_107.png)
+![](visuals/strip_vibrations_x_exp_nr_2.png)
 
 | Column name of feature | Change made                             | Reason                                                                                                                        |
 |------------------------|-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
