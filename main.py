@@ -1,6 +1,6 @@
 from utils.manipulate_dataset import *
 from utils.model import *
-
+from scipy import fftpack
 
 bear_class = pd.read_csv(r'..\data\bearing_classes.csv', sep=';')
 bear_signal = pd.read_csv(r'..\data\bearing_signals.csv', sep=',')
@@ -16,4 +16,8 @@ if __name__ == '__main__':
     # modeling RandomForest
     features_to_exclude = ['target', 'experiment_id', 'bearing_1_id', 'bearing_2_id', 'hz', 'w']  # hz? rpm?
     fit_evaluate_model_random_forest(low_speed_means, features_to_exclude, test_size=0.3)
+
+    # feature engineering
+    feature_engineering_df = extract_data_from_time_series_analysis(bear_signal,
+                                                                    bear_class)
 

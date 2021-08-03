@@ -87,3 +87,83 @@ def fft_dataframe_maker(df):
         exp_freq_list = {'Exp_id': i, 'fft_X': sig_fft_x, 'fft_Y': sig_fft_y, 'fft_Z': sig_fft_z}
         df_temp = pd.DataFrame(exp_freq_list)
         df_freq = pd.concat([df_freq, df_temp], axis=0)
+
+
+def extract_data_from_time_series_analysis(df, df_classes):
+    experiment_id = np.arange(1, 113)
+    max_amplitudes_x = []
+    max_amplitudes_y = []
+    max_amplitudes_z = []
+
+    mean_vibrations_x = []
+    mean_vibrations_y = []
+    mean_vibrations_z = []
+
+    for exp_nr in df.experiment_id.unique():
+        exp = df[df.experiment_id == exp_nr]
+        # exp_a1_x = exp.a1_x.values
+
+        exp_a2_x = exp.a2_x.values
+        exp_a2_y = exp.a2_y.values
+        exp_a2_z = exp.a2_z.values
+
+        exp_timestamp = exp.timestamp
+        exp_hz = exp.hz
+
+        signal_a2_x = fftpack.fft(exp_a2_x)
+        signal_a2_y = fftpack.fft(exp_a2_y)
+        signal_a2_z = fftpack.fft(exp_a2_z)
+        signal_a2_x_power = np.abs(signal_a2_x) ** 2
+        signal_a2_y_power = np.abs(signal_a2_y) ** 2
+        signal_a2_z_power = np.abs(signal_a2_z) ** 2
+
+        sig_a1_x = fftpack.fft(exp_a2_x)
+        sig_a1_y = fftpack.fft(exp_a2_y)
+        sig_a1_z = fftpack.fft(exp_a2_z)
+
+        sample_freq = fftpack.fftfreq(exp_a2_x.size, d=exp.timestamp.diff().mean())
+        # fig, ax = plt.subplots(figsize=(10, 10))
+        # plt.ylim([0, 7e8])
+        # plt.xlim([-500, 500])
+        # plt.plot(sample_freq, signal_a2_x_power, c='red', alpha=0.5, label='x')
+        # plt.plot(sample_freq, signal_a2_y_power, c='blue', alpha=0.5, label='y')
+        # plt.plot(sample_freq, signal_a2_z_power, c='green', alpha=0.5, label='z')
+        # plt.legend()
+        # plt.show()
+
+        # print(signal_a2_x_power.shape)
+        # print(type(signal_a2_x_power))
+
+        max_amplitude_x = signal_a2_x_power.max()
+        max_amplitudes_x.append(max_amplitude_x)
+        max_amplitude_y = signal_a2_y_power.max()
+        max_amplitudes_y.append(max_amplitude_y)
+        max_amplitude_z = signal_a2_z_power.max()
+        max_amplitudes_z.append(max_amplitude_z)
+
+        mean_vibration_x = exp.a2_x.mean()
+        mean_vibrations_x.append(mean_vibration_x)
+        mean_vibration_y = exp.a2_y.mean()
+        mean_vibrations_y.append(mean_vibration_y)
+        mean_vibration_z = exp.a2_z.mean()
+        mean_vibrations_z.append(mean_vibration_z)
+
+    # print(len(mean_vibrations_x))
+    # print(len(max_amplitudes_x))
+
+    # bear_signal.groupby('experiment_id', as_index=False).
+
+    target = df_classes.status[1:]
+
+    time_series_df = pd.DataFrame({
+        'experiment_id': experiment_id,
+        'mean_vibrations_x': mean_vibrations_x,
+        'mean_vibrations_y': mean_vibrations_y,
+        'mean_vibrations_z': mean_vibrations_z,
+        'max_amplitudes_x': max_amplitudes_x,
+        'max_amplitudes_y': max_amplitudes_y,
+        'max_amplitudes_z': max_amplitudes_z,
+        'target': target
+    })
+
+    return time_series_df

@@ -132,9 +132,9 @@ def show_plot_test_vibration_versus_control_experiment_nr1(df):
 
 
 if __name__ == '__main__':
-    # save_aligned_swarmplots(low_speed_set, bear_class, 'swarm_lowspeed_vibrations.png')
-    # low_speed_for_plotting = low_speed_set[low_speed_set.hz < 4]
-    # for axis in ['x', 'y', 'z']:
-    #     save_stripplot_vibration_differences(axis, low_speed_set, bear_class, 2)
-    #     save_stripplot_vibration_differences(axis, low_speed_set, bear_class, 107)
+    save_aligned_swarmplots(low_speed_set, bear_class, 'swarm_lowspeed_vibrations.png')
+    low_speed_for_plotting = low_speed_set[low_speed_set.hz < 4]
+    for axis in ['x', 'y', 'z']:
+        save_stripplot_vibration_differences(axis, low_speed_set, bear_class, 2)
+        save_stripplot_vibration_differences(axis, low_speed_set, bear_class, 107)
     show_plot_test_vibration_versus_control_experiment_nr1(bear_signal)
